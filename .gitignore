@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+logs/
+*.log
+*.log.*
+.env
+.env.*
+!.env.example
+auth.json
+settings.local.json
+dist/
+*.tar.gz
+.DS_Store

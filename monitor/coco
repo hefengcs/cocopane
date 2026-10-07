@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Resolve the installed symlink without relying on the caller's working directory.
+set -euo pipefail
+SELF="$(readlink -f "${BASH_SOURCE[0]}")"
+DIR="$(dirname "$SELF")"
+command -v python3 >/dev/null || { echo 'coco requires Python 3.9+.' >&2; exit 1; }
+case "${1:-help}" in
+  open) shift; exec python3 "$DIR/open_monitor.py" "$@" ;;
+  codex|claude) agent="$1"; shift; exec python3 "$DIR/open_monitor.py" "$agent" "$@" ;;
+  set-log) shift; exec bash "$DIR/set_latest_log.sh" "$@" ;;
+  set-task) shift; exec bash "$DIR/set_task.sh" "$@" ;;
+  --version|version) cat "$DIR/../VERSION" ;;
+  *) exec python3 "$DIR/manage.py" "$@" ;;
+esac

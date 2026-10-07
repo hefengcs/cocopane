@@ -1,0 +1,20 @@
+name: tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python: ['3.9', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: sudo apt-get update && sudo apt-get install -y tmux
+      - run: bash -n install.sh monitor/coco monitor/set_latest_log.sh monitor/set_task.sh monitor/_resize_layout.sh
+      - run: python3 -m unittest discover -s monitor -p 'test_*.py'
+      - run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - run: python3 tools/package.py
