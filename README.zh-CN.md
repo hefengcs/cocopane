@@ -7,6 +7,11 @@
 在服务器终端中，把 Codex / Claude、账号额度、GPU 和任务日志放进同一个 tmux 窗口。
 左侧对话占 60%，右侧监控占 40%；无需 pip 包、网页服务或管理员权限安装 coco。
 
+![CocoPane 界面：左侧对话，右侧账号额度、GPU 和任务日志](docs/images/dashboard.png)
+
+上图由真实 tmux 会话的布局和面板输出渲染而成；对话、额度、GPU 和日志使用演示数据。
+左侧为示例对话，不是 Codex 原生界面，也不代表真实模型任务已通过验证。
+
 ## 安装前准备
 
 - Linux / WSL2、Bash 4+、Python 3.9+、tmux 3.0+、GNU coreutils。
@@ -144,6 +149,10 @@ python3 -m unittest discover -s monitor -p 'test_*.py'
 python3 -m unittest discover -s tests -p 'test_*.py'
 python3 tools/package.py
 ```
+
+重新生成截图：安装 Chrome/Chromium 后运行 `python3 tools/screenshot.py`。
+脚本使用独立 tmux 服务、临时 HOME 和演示程序，不读取你的账号或发起模型请求。
+浏览器仅为此文档工具所需，日常使用 CocoPane 无需安装。
 
 集成测试使用临时 HOME、临时安装目录、假 CLI 和独立 tmux 服务，不调用真实模型。
 独立发行版尚未使用真实账号完成从启动到任务结束的完整验证；WSL2 尚未实测。

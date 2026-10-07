@@ -6,15 +6,11 @@ A terminal dashboard for AI coding agents. Run Codex or Claude Code on a Linux s
 Keep the agent, Codex account quota, GPU utilization and a task log in one tmux window.
 No Python packages, web server or background service installation required.
 
-```text
-┌──────────────────────────────┬─────────────────────┐
-│                              │ Codex account quota │
-│                              ├─────────────────────┤
-│       Codex / Claude         │ GPU utilization     │
-│            60%               ├─────────────────────┤
-│                              │ Task log            │
-└──────────────────────────────┴─────────────────────┘
-```
+![CocoPane dashboard: agent on the left; quota, GPU and task log on the right](docs/images/dashboard.png)
+
+Rendered capture of a real tmux session, using a demo agent and synthetic quota,
+GPU and log data. The left pane is an illustrative conversation, not the Codex UI.
+The dashboard uses a 60/40 split.
 
 Claude sessions omit the Codex quota pane. CPU-only hosts show a useful GPU
 placeholder; use `--no-gpu` to hide it entirely.
@@ -175,6 +171,11 @@ python3 -m unittest discover -s monitor -p 'test_*.py'
 python3 -m unittest discover -s tests -p 'test_*.py'
 python3 tools/package.py           # writes dist/cocopane-0.1.0.tar.gz
 ```
+
+To regenerate the screenshot, run `python3 tools/screenshot.py` with Chrome/Chromium
+installed. It uses an isolated tmux server and temporary HOME with demo executables;
+it does not access your agent account or send model requests. Chrome is only needed
+for this optional documentation tool.
 
 Integration tests use temporary HOME/state/install directories, fake agent executables and
 private tmux sockets. They do not send model requests or use your agent account.

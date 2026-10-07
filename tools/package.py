@@ -14,6 +14,7 @@ def package():
     version = (ROOT / "VERSION").read_text().strip()
     name = "cocopane-" + version
     files = [ROOT / file for file in ROOT_FILES]
+    files.append(ROOT / "docs/images/dashboard.png")
     for directory in ("monitor", "tests", "tools", "ci"):
         for file in (ROOT / directory).rglob("*"):
             if not file.is_file() or file.is_symlink() or "__pycache__" in file.parts:

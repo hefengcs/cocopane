@@ -47,6 +47,8 @@ def main():
         # Explicit export list: no logs, credentials, personal notes or bytecode.
         for name in ("VERSION", "LICENSE", "README.md", "README.zh-CN.md", "install.py", "install.sh"):
             shutil.copy2(ROOT / name, staging / name)
+        (staging / "docs/images").mkdir(parents=True)
+        shutil.copy2(ROOT / "docs/images/dashboard.png", staging / "docs/images/dashboard.png")
         (staging / "monitor").mkdir()
         for file in (ROOT / "monitor").iterdir():
             if file.is_file() and not file.name.startswith("test_") and file.suffix in (".py", ".sh", ".md", ".conf", ""):
